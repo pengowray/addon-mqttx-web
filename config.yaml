@@ -1,0 +1,17 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: MQTTX add-on
+version: "0.9"
+slug: slug example
+description: MQTTX is a cross-platform MQTT 5.0 client toolbox that offers features such as scripts, benchmarks, data simulation, and AI-powered copilot. Learn how to connect, publish, subscribe, and use MQTTX with MQTT 5.0, 3.1.1, and 3.1.
+url: "https://github.com/pengowray/addon-mqttx-web"
+arch:
+  - amd64
+init: false
+map:
+  - share:rw
+options:
+  message: "Hello world..."
+schema:
+  message: "str?"
+image: "/{arch}-addon-mqttx"
+# image: "/home-assistant/{arch}-addon-example"
