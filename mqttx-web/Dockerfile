@@ -6,19 +6,18 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG BUILD_ARCH=amd64
-
 RUN \
     ARCH="${BUILD_ARCH}" \
     && if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; fi \
     && if [ "${BUILD_ARCH}" = "armv7" ]; then ARCH="armhf"; fi 
 
-#    && curl -J -L -o /tmp/mqttx.deb "filename"
-
 RUN apt-get update && apt-get install -y git
 RUN apt-get install -y --no-install-recommends nginx=1.22.1-9
-
 RUN apt-get install -y --no-install-recommends nodejs npm
 RUN npm i -g http-server 
+
+## todo: use release instead 
+#curl -J -L -o /tmp/mqttx.tar.gz "https://github.com/emqx/MQTTX/archive/refs/tags/v1.9.5.tar.gz"
 
 WORKDIR /app
 RUN git clone https://github.com/emqx/MQTTX.git
@@ -70,7 +69,5 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-WORKDIR /app/MQTTX/web
+#WORKDIR /app/MQTTX/web
 #RUN http-server -p 8080
-
-#todo: nginx

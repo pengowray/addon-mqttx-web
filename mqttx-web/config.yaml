@@ -2,10 +2,12 @@
 name: MQTTX Web
 version: dev
 slug: mqttx-web
-description: The open platform for beautiful analytics and monitoring
-url: https://github.com/pengowray/addon-mqttx-web
+description: MQTTX is a cross-platform MQTT 5.0 client toolbox that offers features such as scripts, benchmarks, data simulation, and AI-powered copilot. Learn how to connect, publish, subscribe, and use MQTTX with MQTT 5.0, 3.1.1, and 3.1.
+url: "https://github.com/pengowray/addon-mqttx-web"
 #codenotary: codenotary@frenck.dev
 startup: services
+#map:
+#  - share:rw
 ingress: true
 ingress_port: 8099
 ingress_stream: true
