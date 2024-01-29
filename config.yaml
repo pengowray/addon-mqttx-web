@@ -16,6 +16,5 @@ schema:
 # image: "/home-assistant/amd64-addon-mqttx"
 # image: "/home-assistant/{arch}-addon-example"
 ingress: true
-ingress_port: 80
-# todo: use port 8099
+ingress_port: 8099
 ingress_stream: true
