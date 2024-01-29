@@ -1,11 +1,10 @@
 #!/usr/bin/env bashio
 # ==============================================================================
-/etc/cont-init.d/banner.sh
-/etc/cont-init.d/nginx.sh
+# /etc/cont-init.d/banner.sh
 
 # Start NGiNX
-/etc/services.d/nginx/run &
+#/etc/services.d/nginx/run &
 
 ## Start MQTTX Web
-# cd /app
-# /app/http-server -p 80
+cd /app/web/
+/app/web/http-server -p 8080 &
