@@ -1,10 +1,24 @@
-#!/usr/bin/env bashio
+#!/command/with-contenv bashio
 # ==============================================================================
-# /etc/cont-init.d/banner.sh
+###!/usr/bin/env bashio
 
-# Start NGiNX
-#/etc/services.d/nginx/run &
+declare ingress_entry
+ingress_entry=$(bashio::addon.ingress_entry)
 
-## Start MQTTX Web
-cd /app/web/
-/app/web/http-server -p 8080 &
+# sed -i "s#%%ingress_entry%%#${ingress_entry}#g" "${CONFIG}"
+
+export NODE_ENV='production'
+export BASE_URL='${ingress_entry}/'
+export VUE_APP_PAGE_TITLE='MQTTX Web for Home Assistant'
+export VUE_APP_PAGE_DESCRIPTION='Local MQTT 5.0 client, using MQTT over WebSocket to connect to the MQTT Broker'
+
+cd /app/MQTTX/web/
+
+echo "NODE_ENV=production" > .env.local
+echo "BASE_URL=$(bashio::addon.ingress_entry)/" >> .env.local 
+echo "VUE_APP_PAGE_TITLE=MQTTX Web for Home Assistant" >> .env.local
+echo "VUE_APP_PAGE_DESCRIPTION=Local MQTT 5.0 client, using MQTT over WebSocket to connect to the MQTT Broker." >> .env.local
+
+echo "$(bashio::addon.ingress_entry)" > ".test_ingress_entry"
+
+http-server -p 8080 --no-dotfiles

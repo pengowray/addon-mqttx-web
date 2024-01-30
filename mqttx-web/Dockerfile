@@ -13,16 +13,24 @@ RUN \
 
 RUN apt-get update && apt-get install -y git
 RUN apt-get install -y --no-install-recommends nginx=1.22.1-9
-RUN apt-get install -y --no-install-recommends nodejs npm
+RUN apt-get install -y --no-install-recommends nodejs npm 
 RUN npm i -g http-server 
 
 ## todo: use release instead 
 #curl -J -L -o /tmp/mqttx.tar.gz "https://github.com/emqx/MQTTX/archive/refs/tags/v1.9.5.tar.gz"
 
-WORKDIR /app
+WORKDIR /tmp
 RUN git clone https://github.com/emqx/MQTTX.git
-WORKDIR /app/MQTTX
+WORKDIR /tmp/MQTTX
 RUN git checkout c0bd21e
+
+WORKDIR /tmp/MQTTX/web
+RUN npm i -g yarn
+RUN echo "VUE_APP_PAGE_TITLE=MQTTX Web for Home Assistant" > .env.local
+RUN echo "VUE_APP_PAGE_DESCRIPTION=Local MQTT 5.0 client, using MQTT over WebSocket to connect to the MQTT Broker." >> .env.local
+yarn && yarn build
+WORKDIR /app
+COPY /tmp/MQTTX/web/dist ./
 
 RUN rm -fr \
         /tmp/* \
