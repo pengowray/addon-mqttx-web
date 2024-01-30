@@ -19,7 +19,7 @@ RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
    
 WORKDIR /app
     
-RUN bashio /setup.sh
+#RUN /usr/bin/with-contenv bashio /setup.sh
     
 # CMD [ "http-server", "-p", "8099" ]
 CMD [ "bashio", "/run.sh" ]

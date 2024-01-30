@@ -1,3 +1,5 @@
+#!/bin/bash bashio
+
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Start the example service
