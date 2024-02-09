@@ -18,8 +18,10 @@ RUN mv /tmp/bashio/lib /usr/lib/bashio
 RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
    
 WORKDIR /app
-    
-#RUN /usr/bin/with-contenv bashio /setup.sh
-    
+
+## setup is redundant
+# RUN /usr/bin/with-contenv bashio /setup.sh
+RUN bashio /setup.sh
+
 # CMD [ "http-server", "-p", "8099" ]
 CMD [ "bashio", "/run.sh" ]
